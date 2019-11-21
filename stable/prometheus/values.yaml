@@ -1304,23 +1304,14 @@ serverFiles:
 # adds additional scrape configs to prometheus.yml
 # must be a string so you have to add a | after extraScrapeConfigs:
 # example adds prometheus-blackbox-exporter scrape config
-extraScrapeConfigs:
-  # - job_name: 'prometheus-blackbox-exporter'
-  #   metrics_path: /probe
-  #   params:
-  #     module: [http_2xx]
-  #   static_configs:
-  #     - targets:
-  #       - https://example.com
-  #   relabel_configs:
-  #     - source_labels: [__address__]
-  #       target_label: __param_target
-  #     - source_labels: [__param_target]
-  #       target_label: instance
-  #     - target_label: __address__
-  #       replacement: prometheus-blackbox-exporter:9115
+extraScrapeConfigs: |
+      - job_name: 'keycloak'
+        scheme: https
+        metrics_path: /auth/realms/master/metrics
+        static_configs:
+          - targets: ['keycloak.harmoneylabs.com']
 
 networkPolicy:
-  ## Enable creation of NetworkPolicy resources.
+  ## Enable creation of NetworkPolic  y resources.
   ##
   enabled: false
